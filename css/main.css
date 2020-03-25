@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css?family=Righteous|Roboto:300,400,500&display=swap&subset=latin-ext");
+/* line 7, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+/* line 13, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #FFF; }
+  /* line 17, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+  body.active {
+    overflow: hidden; }
+
+/* line 22, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+img {
+  width: 100%; }
+
+/* line 26, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+a {
+  text-decoration: none;
+  color: #000; }
+
+/* line 32, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 60px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(134, 134, 134, 0.5);
+  background: #fff;
+  z-index: 99; }
+  /* line 45, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+  header h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 20px;
+    letter-spacing: 2px; }
+    /* line 51, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+    header h1 a {
+      color: #2B7A78;
+      transition: all .3s ease-in-out; }
+      /* line 55, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+      header h1 a:hover {
+        letter-spacing: 3px; }
+  /* line 61, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+  header .menu {
+    display: flex;
+    align-items: center; }
+    /* line 65, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+    header .menu .search-field {
+      position: relative;
+      margin-right: 16px; }
+      /* line 69, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+      header .menu .search-field input.product-search {
+        height: 30px;
+        width: 160px;
+        padding: 0 12px;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        color: #555555;
+        border: 1px solid rgba(134, 134, 134, 0.5);
+        border-radius: 3px; }
+      /* line 81, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+      header .menu .search-field img.search-icon {
+        position: absolute;
+        top: 6px;
+        right: 12px;
+        width: 18px; }
+    /* line 90, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+    header .menu .account-log-reg {
+      display: none;
+      margin: 0 50px 0 4px;
+      font-size: 14px; }
+      /* line 96, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+      header .menu .account-log-reg .register-btn {
+        display: block;
+        margin-left: 20px;
+        padding: 7px;
+        border: 1px solid #2B7A78;
+        border-radius: 3px;
+        color: #2B7A78; }
+    /* line 106, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+    header .menu .nav-btn {
+      display: flex;
+      width: 25px;
+      background: transparent;
+      border: none; }
+
+/*# sourceMappingURL=main.css.map */

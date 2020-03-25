@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous|Roboto:300,400,500&display=swap&subset=latin-ext');
+
+$light-gray: #555555;
+$light-bg: hsl(0, 19%, 95%);
+$sea: #2B7A78;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #FFF;
+
+    &.active {
+        overflow: hidden;
+    }
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+// ******** HEADER ********
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    height: 60px;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(134, 134, 134, .5);
+    background: #fff;
+    z-index: 99;
+
+    h1 {
+        font-family: 'Righteous', cursive;
+        font-size: 20px;
+        letter-spacing: 2px;
+
+
+        a {
+            color: $sea;
+            transition: all .3s ease-in-out;
+
+            &:hover {
+                letter-spacing: 3px;
+            }
+        }
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+
+        .search-field {
+            position: relative;
+            margin-right: 16px;
+
+            input.product-search {
+                height: 30px;
+                width: 160px;
+                padding: 0 12px;
+                font-size: 14px;
+                font-weight: 300;
+                letter-spacing: 1px;
+                color: $light-gray;
+                border: 1px solid rgba(134, 134, 134, .5);
+                border-radius: 3px;
+            }
+
+            img.search-icon {
+                position: absolute;
+                top: 6px;
+                right: 12px;
+                width: 18px;
+            }
+
+        }
+
+        .account-log-reg {
+            display: none;
+            margin: 0 50px 0 4px;
+            font-size: 14px;
+
+
+            .register-btn {
+                display: block;
+                margin-left: 20px;
+                padding: 7px;
+                border: 1px solid $sea;
+                border-radius: 3px;
+                color: $sea;
+            }
+        }
+
+        .nav-btn {
+            display: flex;
+            width: 25px;
+            background: transparent;
+            border: none;
+        }
+    }
+}
