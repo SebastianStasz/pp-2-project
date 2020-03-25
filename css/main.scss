@@ -111,3 +111,226 @@ header {
         }
     }
 }
+
+// ******** NAVIGATION ********
+nav.side-nav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    height: calc(100vh - 60px);
+    width: 270px;
+    background: $light-bg;
+    border-left: 1px solid rgba(134, 134, 134, .5);
+    display: none;
+    z-index: 10;
+
+    &.active {
+        display: block;
+    }
+
+    .user-account-section {
+        padding: 20px;
+        border-bottom: 1px solid rgba(134, 134, 134, .5);
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 60px;
+            height: 60px;
+            margin-right: 60px;
+            border-radius: 90px;
+            background: $sea;
+
+            img.user-avatar-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .user-name {
+            font-size: 20px;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 15px;
+        }
+
+        a.register-btn {
+            margin-left: 6px;
+            color: #3156D8;
+            text-decoration: underline;
+        }
+    }
+
+    ul.navigation {
+        margin-top: 60px;
+        margin-left: 40px;
+        list-style: none;
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 45px;
+            font-size: 20px;
+
+            a:hover {
+                color: $sea;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &.account {
+                display: none;
+            }
+
+            img {
+                width: 20px;
+                height: 20px;
+                margin-right: 40px;
+            }
+        }
+    }
+
+    button.nav-close-btn {
+        position: absolute;
+        right: 45px;
+        bottom: 40px;
+        background: transparent;
+        border: none;
+
+        img {
+            width: 30px;
+            height: 30px;
+            transform: rotate(180deg);
+        }
+    }
+}
+
+// ******** HEADER & NAVIGATION Responsive********
+@media (min-width: 550px) {
+
+    header {
+        .menu {
+            .account-log-reg {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+    }
+
+    @media (min-width: 600px) {
+        header {
+            padding: 0 30px;
+        }
+    }
+
+    @media (min-width: 900px) {
+        .wrapper {
+            margin-left: 56px;
+        }
+
+        header {
+            padding: 0 30px;
+            position: static;
+
+            nav.side-nav {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 56px;
+                height: 100vh;
+                padding: 25px 0;
+                background: #FFF;
+                overflow: hidden;
+                border-right: 1px solid rgba(134, 134, 134, .5);
+                transition: width .3s ease-in-out;
+
+                &.active {
+                    width: 220px;
+                }
+
+                .user-account-section {
+                    display: none;
+                }
+
+                ul.navigation {
+                    height: 100%;
+                    margin: 0 0 0 17px;
+
+                    li {
+
+
+                        &:first-child {
+                            margin-bottom: 80px;
+                        }
+
+                        &.account {
+                            display: flex;
+                        }
+
+                        &.contact {
+                            position: absolute;
+                            bottom: 25px;
+                        }
+
+                        a {
+                            display: flex;
+                            align-items: center;
+                            color: $light-gray;
+                            font-size: 18px;
+                            white-space: nowrap;
+                        }
+
+                        img {
+                            margin: 0;
+                        }
+
+                        span.link-name {
+                            padding-left: 20px;
+                        }
+                    }
+                }
+
+                button.nav-close-btn {
+                    display: none;
+                }
+            }
+
+            .menu {
+                .account-log-reg {
+                    margin: 0 0 0 4px;
+                }
+
+                .nav-btn {
+                    display: none;
+                }
+            }
+        }
+
+
+    }
+}
+
+@media (min-width: 1300px) {
+    header {
+        padding: 0 70px;
+    }
+}
+
+@media (min-width: 1400px) {
+    header {
+        padding: 0 90px;
+    }
+}
