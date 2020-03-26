@@ -442,6 +442,15 @@ section.description {
     }
 }
 
+input.back-btn {
+    width: 170px;
+    height: 40px;
+    padding-left: 10px;
+    margin: 40px 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
 // ******** PRODUCT SECTION ********
 section.product {
     display: flex;

@@ -459,6 +459,15 @@ section.description form.product-id .product-id-clear:hover {
   border-color: #555555;
 }
 
+input.back-btn {
+  width: 170px;
+  height: 40px;
+  padding-left: 10px;
+  margin: 40px 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 section.product {
   display: -webkit-box;
   display: -ms-flexbox;
