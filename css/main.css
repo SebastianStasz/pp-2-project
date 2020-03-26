@@ -1,97 +1,122 @@
-@import url("https://fonts.googleapis.com/css?family=Righteous|Roboto:300,400,500&display=swap&subset=latin-ext");
-/* line 7, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+@import url("https://fonts.googleapis.com/css?family=Righteous|Roboto:400,500,700&display=swap");
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
-/* line 13, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
 body {
   font-family: 'Roboto', sans-serif;
-  background: #FFF; }
-  /* line 17, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  body.active {
-    overflow: hidden; }
+  background: #FFF;
+}
 
-/* line 22, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+body.active {
+  overflow: hidden;
+}
+
 img {
-  width: 100%; }
+  width: 100%;
+}
 
-/* line 26, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
 a {
   text-decoration: none;
-  color: #000; }
+  color: #000;
+}
 
-/* line 32, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
 header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   height: 60px;
   padding: 0 16px;
   border-bottom: 1px solid rgba(134, 134, 134, 0.5);
   background: #fff;
-  z-index: 99; }
-  /* line 45, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  header h1 {
-    font-family: 'Righteous', cursive;
-    font-size: 20px;
-    letter-spacing: 2px; }
-    /* line 51, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header h1 a {
-      color: #2B7A78;
-      transition: all .3s ease-in-out; }
-      /* line 55, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header h1 a:hover {
-        letter-spacing: 3px; }
-  /* line 61, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  header .menu {
-    display: flex;
-    align-items: center; }
-    /* line 65, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header .menu .search-field {
-      position: relative;
-      margin-right: 16px; }
-      /* line 69, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header .menu .search-field input.product-search {
-        height: 30px;
-        width: 160px;
-        padding: 0 12px;
-        border: 1px solid rgba(134, 134, 134, 0.5);
-        border-radius: 3px;
-        font-size: 14px;
-        font-weight: 300;
-        letter-spacing: 1px;
-        color: #555555; }
-      /* line 81, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header .menu .search-field img.search-icon {
-        position: absolute;
-        top: 6px;
-        right: 12px;
-        width: 18px; }
-    /* line 90, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header .menu .account-log-reg {
-      display: none;
-      margin: 0 50px 0 4px;
-      font-size: 14px; }
-      /* line 96, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header .menu .account-log-reg .register-btn {
-        display: block;
-        margin-left: 20px;
-        padding: 7px;
-        border: 1px solid #2B7A78;
-        border-radius: 3px;
-        color: #2B7A78; }
-    /* line 106, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header .menu .nav-btn {
-      display: flex;
-      width: 25px;
-      background: transparent;
-      border: none; }
+  z-index: 99;
+}
 
-/* line 116, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
+header h1 {
+  font-family: 'Righteous', cursive;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+header h1 a {
+  color: #2B7A78;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+header h1 a:hover {
+  letter-spacing: 3px;
+}
+
+header .menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header .menu .search-field {
+  position: relative;
+  margin-right: 16px;
+}
+
+header .menu .search-field input.product-search {
+  height: 30px;
+  width: 160px;
+  padding: 0 12px;
+  border: 1px solid rgba(134, 134, 134, 0.5);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #555555;
+}
+
+header .menu .search-field img.search-icon {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  width: 18px;
+}
+
+header .menu .account-log-reg {
+  display: none;
+  margin: 0 50px 0 4px;
+  font-size: 14px;
+}
+
+header .menu .account-log-reg .register-btn {
+  display: block;
+  margin-left: 20px;
+  padding: 7px;
+  border: 1px solid #2B7A78;
+  border-radius: 3px;
+  color: #2B7A78;
+}
+
+header .menu .nav-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 25px;
+  background: transparent;
+  border: none;
+}
+
 nav.side-nav {
   position: absolute;
   top: 60px;
@@ -101,165 +126,323 @@ nav.side-nav {
   background: #f5f0f0;
   border-left: 1px solid rgba(134, 134, 134, 0.5);
   display: none;
-  z-index: 10; }
-  /* line 127, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  nav.side-nav.active {
-    display: block; }
-  /* line 131, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  nav.side-nav .user-account-section {
-    padding: 20px;
-    border-bottom: 1px solid rgba(134, 134, 134, 0.5); }
-    /* line 135, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav .user-account-section .user-info {
-      display: flex;
-      align-items: center; }
-    /* line 140, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav .user-account-section .user-avatar-circle {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 60px;
-      height: 60px;
-      margin-right: 60px;
-      border-radius: 90px;
-      background: #2B7A78; }
-      /* line 151, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      nav.side-nav .user-account-section .user-avatar-circle img.user-avatar-icon {
-        width: 30px;
-        height: 30px; }
-    /* line 157, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav .user-account-section .user-name {
-      font-size: 20px; }
-    /* line 161, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav .user-account-section p {
-      margin-top: 20px;
-      font-size: 15px; }
-    /* line 166, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav .user-account-section a.register-btn {
-      margin-left: 6px;
-      color: #3156D8;
-      text-decoration: underline; }
-  /* line 173, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  nav.side-nav ul.navigation {
-    margin-top: 60px;
-    margin-left: 40px;
-    list-style: none; }
-    /* line 178, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav ul.navigation li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 45px;
-      font-size: 20px; }
-      /* line 184, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      nav.side-nav ul.navigation li a:hover {
-        color: #2B7A78; }
-      /* line 188, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      nav.side-nav ul.navigation li:last-child {
-        margin-bottom: 0; }
-      /* line 192, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      nav.side-nav ul.navigation li.account {
-        display: none; }
-      /* line 196, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      nav.side-nav ul.navigation li img {
-        width: 20px;
-        height: 20px;
-        margin-right: 40px; }
-  /* line 204, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  nav.side-nav button.nav-close-btn {
-    position: absolute;
-    right: 45px;
-    bottom: 40px;
-    background: transparent;
-    border: none; }
-    /* line 211, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    nav.side-nav button.nav-close-btn img {
-      width: 30px;
-      height: 30px;
-      transform: rotate(180deg); }
+  z-index: 10;
+}
+
+nav.side-nav.active {
+  display: block;
+}
+
+nav.side-nav .user-account-section {
+  padding: 20px;
+  border-bottom: 1px solid rgba(134, 134, 134, 0.5);
+}
+
+nav.side-nav .user-account-section .user-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+nav.side-nav .user-account-section .user-avatar-circle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 60px;
+  height: 60px;
+  margin-right: 60px;
+  border-radius: 90px;
+  background: #2B7A78;
+}
+
+nav.side-nav .user-account-section .user-avatar-circle img.user-avatar-icon {
+  width: 30px;
+  height: 30px;
+}
+
+nav.side-nav .user-account-section .user-name {
+  font-size: 20px;
+}
+
+nav.side-nav .user-account-section p {
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+nav.side-nav .user-account-section a.register-btn {
+  margin-left: 6px;
+  color: #3156D8;
+  text-decoration: underline;
+}
+
+nav.side-nav ul.navigation {
+  margin-top: 60px;
+  margin-left: 40px;
+  list-style: none;
+}
+
+nav.side-nav ul.navigation li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 45px;
+  font-size: 20px;
+}
+
+nav.side-nav ul.navigation li a:hover {
+  color: #2B7A78;
+}
+
+nav.side-nav ul.navigation li:last-child {
+  margin-bottom: 0;
+}
+
+nav.side-nav ul.navigation li.account {
+  display: none;
+}
+
+nav.side-nav ul.navigation li img {
+  width: 20px;
+  height: 20px;
+  margin-right: 40px;
+}
+
+nav.side-nav button.nav-close-btn {
+  position: absolute;
+  right: 45px;
+  bottom: 40px;
+  background: transparent;
+  border: none;
+}
+
+nav.side-nav button.nav-close-btn img {
+  width: 30px;
+  height: 30px;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
 
 @media (min-width: 550px) {
-  /* line 224, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
   header .menu .account-log-reg {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center; } }
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
 
 @media (min-width: 550px) and (min-width: 600px) {
-  /* line 233, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  header {
-    padding: 0 30px; } }
-
-@media (min-width: 550px) and (min-width: 900px) {
-  /* line 239, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-  .wrapper {
-    margin-left: 56px; }
-  /* line 243, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
   header {
     padding: 0 30px;
-    position: static; }
-    /* line 247, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header nav.side-nav {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 56px;
-      height: 100vh;
-      padding: 25px 0;
-      background: #FFF;
-      overflow: hidden;
-      border-right: 1px solid rgba(134, 134, 134, 0.5);
-      transition: width .3s ease-in-out; }
-      /* line 260, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header nav.side-nav.active {
-        width: 220px; }
-      /* line 264, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header nav.side-nav .user-account-section {
-        display: none; }
-      /* line 268, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header nav.side-nav ul.navigation {
-        height: 100%;
-        margin: 0 0 0 17px; }
-        /* line 275, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-        header nav.side-nav ul.navigation li:first-child {
-          margin-bottom: 80px; }
-        /* line 279, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-        header nav.side-nav ul.navigation li.account {
-          display: flex; }
-        /* line 283, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-        header nav.side-nav ul.navigation li.contact {
-          position: absolute;
-          bottom: 25px; }
-        /* line 288, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-        header nav.side-nav ul.navigation li a {
-          display: flex;
-          align-items: center;
-          color: #555555;
-          font-size: 18px;
-          white-space: nowrap; }
-        /* line 296, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-        header nav.side-nav ul.navigation li img {
-          margin: 0; }
-        /* line 300, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-        header nav.side-nav ul.navigation li span.link-name {
-          padding-left: 20px; }
-      /* line 306, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-      header nav.side-nav button.nav-close-btn {
-        display: none; }
-    /* line 312, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header .menu .account-log-reg {
-      margin: 0 0 0 4px; }
-    /* line 316, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
-    header .menu .nav-btn {
-      display: none; } }
+  }
+}
+
+@media (min-width: 550px) and (min-width: 900px) {
+  .wrapper {
+    margin-left: 56px;
+  }
+  header {
+    padding: 0 30px;
+    position: static;
+  }
+  header nav.side-nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 56px;
+    height: 100vh;
+    padding: 25px 0;
+    background: #FFF;
+    overflow: hidden;
+    border-right: 1px solid rgba(134, 134, 134, 0.5);
+    -webkit-transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+  }
+  header nav.side-nav.active {
+    width: 220px;
+  }
+  header nav.side-nav .user-account-section {
+    display: none;
+  }
+  header nav.side-nav ul.navigation {
+    height: 100%;
+    margin: 0 0 0 17px;
+  }
+  header nav.side-nav ul.navigation li:first-child {
+    margin-bottom: 80px;
+  }
+  header nav.side-nav ul.navigation li.account {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  header nav.side-nav ul.navigation li.contact {
+    position: absolute;
+    bottom: 25px;
+  }
+  header nav.side-nav ul.navigation li a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    color: #555555;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  header nav.side-nav ul.navigation li img {
+    margin: 0;
+  }
+  header nav.side-nav ul.navigation li span.link-name {
+    padding-left: 20px;
+  }
+  header nav.side-nav button.nav-close-btn {
+    display: none;
+  }
+  header .menu .account-log-reg {
+    margin: 0 0 0 4px;
+  }
+  header .menu .nav-btn {
+    display: none;
+  }
+}
 
 @media (min-width: 1300px) {
-  /* line 327, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
   header {
-    padding: 0 70px; } }
+    padding: 0 70px;
+  }
+}
 
 @media (min-width: 1400px) {
-  /* line 333, /Users/sebastian/Desktop/pp-2 project/css/main.scss */
   header {
-    padding: 0 90px; } }
+    padding: 0 90px;
+  }
+}
 
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+section.description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 460px;
+  padding: 25px;
+  background: #FFF;
+  border-radius: 5px;
+}
+
+section.description h2 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 4px;
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+section.description h6 {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 17px;
+  margin-top: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+section.description h6.first {
+  margin-top: 25px;
+}
+
+section.description p {
+  text-align: justify;
+  line-height: 150%;
+}
+
+section.description p.same-paragraph {
+  margin-top: 12px;
+}
+
+section.description .lists {
+  width: 100%;
+}
+
+section.description .lists ul {
+  margin-left: 20px;
+}
+
+section.description .lists ul li {
+  margin: 10px 0;
+}
+
+@media (min-width: 550px) {
+  body {
+    background: #f5f0f0;
+  }
+  main {
+    padding: 0 25px;
+  }
+  section.description {
+    width: 100%;
+    max-width: 580px;
+    padding: 30px;
+    margin-top: 25px;
+  }
+  section.description .lists {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  section.description .lists .second-list {
+    margin-left: 150px;
+  }
+}
+
+@media (min-width: 700px) {
+  section.description {
+    padding: 25px 50px;
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 800px) {
+  section.description {
+    padding: 25px 80px;
+  }
+}
 /*# sourceMappingURL=main.css.map */
