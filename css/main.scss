@@ -397,6 +397,40 @@ section.description {
             }
         }
     }
+
+    // OPINION ID FORM
+    form.product-id {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+
+        .buttons {
+            display: flex;
+        }
+
+        input.product-id-input {
+            height: 30px;
+            font-size: 17px;
+            padding-left: 5px;
+            margin-left: 10px;
+        }
+
+        button.product-id-btn {
+            margin-left: 20px;
+        }
+
+        button.product-id-btn,
+        .product-id-clear {
+            width: 100%;
+            margin-top: 20px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid #555555;
+            font-size: 15px;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+    }
 }
 
 @media (min-width: 550px) {
