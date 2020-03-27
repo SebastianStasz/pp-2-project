@@ -1,12 +1,49 @@
-HOME
-<html>
+{% extends "scraper/base.html"%}
 
-<head>
-    {% if title %}
-    <title>Oceneo - {{ title }} </title>
-    {% else %}
-    <title>Oceneo</title>
-    {% endif %}
-</head>
+{% block content %}
+<!------ MAIN ------>
+<main>
+    <section class="description">
+        <h2>Opis projektu</h2>
 
-</html>
+        <h6 class="first">Cel projektu</h6>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis recusandae eveniet, expedita
+            laudantium asperiores optio tempore blanditiis reiciendis eaque sit doloribus fuga id, sequi quae
+            iste praesentium debitis ab necessitatibus.
+            Distinctio maiores minima deleniti pariatur perferendis nulla odit et ipsum quia expedita impedit
+            architecto, nobis mollitia delectus. Praesentium architecto, voluptatum accusamus, facere dict.</p>
+
+        <h6>Opis działania aplikacji</h6>
+        <p>Celem tego projektu jest Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur corporis
+            quisquam aliquam quia atque quos deleniti veritatis nostrum omnis facilis! Voluptates corporis
+            mollitia architecto facere illo, quos aliquam nisi laboriosam?Dolorum.</p>
+
+        <p class="same-paragraph">Celem tego projektu jest Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Tenetur corporis
+            quisquam aliquam quia atque quos deleniti veritatis nostrum omnis facilis! Voluptates corporis
+            mollitia architecto facere illo, quos aliquam nisi laboriosam?Dolorum.</p>
+
+        <div class="lists">
+            <div>
+                <h6>Zastosowane biblioteki</h6>
+                <ul>
+                    <li>DataTables</li>
+                    <li>BS4</li>
+                    <li>Requests</li>
+                    <li>Bear</li>
+                </ul>
+            </div>
+
+            <div class="second-list">
+                <h6>Zastosowane podejścia</h6>
+                <ul>
+                    <li>Django</li>
+                    <li>BS4</li>
+                    <li>Requests</li>
+                    <li>Bear</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}

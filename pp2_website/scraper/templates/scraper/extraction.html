@@ -1,1 +1,17 @@
-EXTRACTION
+{% extends "scraper/base.html"%}
+
+{% block content %}
+<!------ MAIN ------>
+<main>
+    <section class="description">
+        <h2>Ekstrakcja opinii</h2>
+        <form class="product-id">
+            <label>Wpisz ID szukanego produktu: <input type="text" class="product-id-input"></label>
+            <div class="buttons">
+                <input class="product-id-clear" type="reset" value="Wyczyść">
+                <button class="product-id-btn">Szukaj</button>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock content %}

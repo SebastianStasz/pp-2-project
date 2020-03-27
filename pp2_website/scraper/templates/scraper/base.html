@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+    <title>Oceneo - {{ title }} </title>
+    {% else %}
+    <title>Oceneo</title>
+    {% endif %}
+
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="{% static 'scraper/main.css' %}">
+
+    <!-- Scripts -->
+    <script defer src="{% static 'scraper/js/navigation.js' %}"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!------ HEADER ------>
+        <header>
+            <h1 class="logo"><a href="#">Oceneo</a></h1>
+            <div class="menu">
+                <div class="search-field">
+                    <img class="search-icon" src="{% static 'scraper/icons/search.svg' %}">
+                    <input class="product-search" type="text" placeholder="Szukaj">
+                </div>
+                <div class="account-log-reg">
+                    <a class="login-btn" href="#">Zaloguj</a>
+                    <a class="register-btn" href="#">Rejestracja</a></div>
+                <button class="nav-btn"><img src="{% static '   scraper/icons/open-nav.svg' %}"></button>
+            </div>
+            <!------ NAVIGATION ------>
+            <nav class="side-nav">
+                <div class="user-account-section">
+                    <div class="user-info">
+                        <div class="user-avatar-circle">
+                            <img class="user-avatar-icon" src="{% static 'scraper/icons/user-avatar.svg' %}">
+                        </div>
+                        <a class="user-name" href="#">Sign in</a>
+                    </div>
+                    <p>Nie posiadasz konta?<a class="register-btn" href="#">Zarejestruj się</a></p>
+                </div>
+                <ul class="navigation">
+                    <li><a href="{% url 'scraper-home' %}"><img src="{% static 'scraper/icons/notion-logo.svg' %}"><span
+                                class="link-name">Strona
+                                główna</span></a>
+                    </li>
+                    <li><a href="{% url 'scraper-extraction' %}"><img
+                                src="{% static 'scraper/icons/star-empty.svg' %}"><span class="link-name">Ekstrakcja
+                                opinii</span></a>
+                    </li>
+                    <li><a href="{% url 'scraper-products' %}"><img
+                                src="{% static 'scraper/icons/products.svg' %}"><span class="link-name">Lista
+                                produktów</span></a>
+                    </li>
+                    <li class="account"><a href="{% url 'scraper-author' %}"><img
+                                src="{% static 'scraper/icons/user.svg' %}"><span class="link-name">O
+                                autorze</span></a>
+                    </li>
+                    <li class="contact"><a href="#"><img src="{% static 'scraper/icons/contact.svg' %}"><span
+                                class="link-name">Contact</span></a></li>
+                </ul>
+                <button class="nav-close-btn"><img src="{% static 'scraper/icons/reply.svg' %}"></button>
+            </nav>
+        </header>
+
+        <!-- CONTENT -->
+
+        {% block content %}{% endblock %}
+
+    </div>
+</body>
+
+</html>
