@@ -6,4 +6,5 @@ urlpatterns = [
     path('author', views.author, name='scraper-author'),
     path('extraction', views.extraction, name='scraper-extraction'),
     path('products', views.products, name='scraper-products'),
+    path('single-product', views.singleProduct, name='scraper-single-product'),
 ]

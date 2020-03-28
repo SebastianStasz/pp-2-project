@@ -1,0 +1,28 @@
+[
+    {
+        "opinion_id": "11990666",
+        "author": "\nKuba        ",
+        "recommendation": "Polecam",
+        "stars": "5/5",
+        "pros": null,
+        "cons": null,
+        "purchased": null,
+        "purchase_date": null,
+        "review_date": "2020-03-26 12:12:34",
+        "useful": "0",
+        "useless": "0"
+    },
+    {
+        "opinion_id": "11819538",
+        "author": "\nMałgorzata        ",
+        "recommendation": "Polecam",
+        "stars": "5/5",
+        "pros": null,
+        "cons": null,
+        "purchased": null,
+        "purchase_date": null,
+        "review_date": "2020-02-28 08:19:08",
+        "useful": "0",
+        "useless": "0"
+    }
+]

@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>django and Bs</title>
+</head>
+
+<body>
+    <!-- form -->
+    <form action="{% url 'django_bs' %}" , method="POST">
+        {% csrf_token %}
+        <input type="text" name="web_link">
+        <input type="submit" name="submit">
+
+
+        <!-- output -->
+        <div class="output">
+            <h2>{{h1_val}}</h2>
+        </div>
+
+
+</body>
+
+</html>
