@@ -56,7 +56,10 @@
                     </div>
                     <div class="product-purchase">
                         <p class="price">{{ product|get_value_from_dict:'product_price' }},00 zł</p>
-                        <button class="buy-btn">Pobierz JSON</button>
+                        <a href="{% url 'download-file' %}?filename=Oceneo - {{ filename }}.json&filedata={{ file }}"
+                            target="_blank">
+                            <button class="buy-btn">Pobierz JSON</button>
+                        </a>
                         <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
                             wykresy</a>
                     </div>

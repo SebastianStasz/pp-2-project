@@ -5,6 +5,7 @@ import json
 
 from django.shortcuts import render
 from .models import Product
+from django.http import HttpResponse
 
 
 def home(request):
@@ -68,7 +69,6 @@ def extraction(request):
             'product_full_stars': range(product_full_stars),
             'product_empty_stars': range(5 - product_full_stars)
         }
-        print(opinions)
 
         # wydobycie składowych dla pojedynczej opinii
         while url:
@@ -132,6 +132,7 @@ def extraction(request):
                 }
 
                 opinions_list.append(opinion_dict)
+                filee = json.dumps(opinions_list)
 
             try:
                 url = url_prefix + \
@@ -139,12 +140,18 @@ def extraction(request):
             except TypeError:
                 url = None
 
-        with open(product_id+'.json', 'w', encoding="utf-8") as fp:
-            json.dump(opinions_list, fp, ensure_ascii=False,
-                      indent=4, separators=(',', ': '))
-
         # Przekierowanie na stronę produktu
-        return render(request, 'scraper/single_product.html', {'opinions': opinions_list, 'product': product, 'title': 'Product'})
+        return render(request, 'scraper/single_product.html', {'opinions': opinions_list, 'product': product, 'title': 'Product', 'file': filee, 'filename': product_id})
 
     # Przekierowanie na stronę ekstrakcji (czysty formularz)
     return render(request, 'scraper/extraction.html', {'title': 'Ekstrakcja opinii'})
+
+
+def download_file(request):
+    filename = request.GET['filename']
+    filedata = request.GET['filedata']
+
+    response = HttpResponse(filedata)
+    response['Content-Type'] = 'text/plain'
+    response['Content-Disposition'] = f'attachment; filename={filename}'
+    return response
