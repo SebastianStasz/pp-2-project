@@ -1,0 +1,104 @@
+{% extends "scraper/base.html"%}
+{% load static %}
+{% load djutils %}
+
+{% block head %}
+
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'scraper/charts.css' %}">
+
+
+<!-- Charts JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+{% endblock head %}
+
+{% block content %}
+<!------ MAIN ------>
+<main>
+    <section class="description">
+        <h2>Wykres Kołowy</h2>
+        <canvas id="circle-graph" width="400" height="90"></canvas>
+    </section>
+
+    <section class="description">
+        <h2>Wykres Słupkowy</h2>
+        <canvas id="bar-graph" width="400" height="90"></canvas>
+    </section>
+    <input value="&#x2B05; Powrót do produktu" class="back-btn" onclick="history.back()">
+</main>
+<script>
+
+    // Circle Chart
+    var ctx = document.getElementById('circle-graph').getContext('2d');
+    var circle_graph = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Polecam', 'Nie polecam', 'Neutralny'],
+            datasets: [{
+                label: 'Liczba gwiazdek ',
+                data: ["{{ rec }}", "{{ notrec }}", "{{ neutral }}"],
+                backgroundColor: [
+                    'rgba(76, 187, 48, 0.2)',
+                    'rgba(220, 71, 2, 0.2)',
+                    'rgba(93, 96, 102, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(76, 187, 48, 1)',
+                    'rgba(220, 71, 2, 1)',
+                    'rgba(93, 96, 102, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // Bar Chart
+    var ctx = document.getElementById('bar-graph').getContext('2d');
+    var bar_graph = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets: [{
+                label: 'Liczba opinii z poszczególnymi ocenami ',
+                data: ["{{ star_1 }}", "{{ star_2 }}", "{{ star_3 }}", "{{ star_4 }}", "{{ star_5 }}"],
+                backgroundColor: [
+                    'rgba(220, 71, 2, 0.2)',
+                    'rgba(135, 17, 209, 0.2)',
+                    'rgba(17, 96, 214, 0.2)',
+                    'rgba(230, 208, 21, 0.2)',
+                    'rgba(34, 214, 17, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(220, 71, 2, 1)',
+                    'rgba(135, 17, 209, 1)',
+                    'rgba(17, 96, 214, 1)',
+                    'rgba(230, 208, 21, 1)',
+                    'rgba(34, 214, 17, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+{% endblock content %}

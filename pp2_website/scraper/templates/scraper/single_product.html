@@ -60,7 +60,9 @@
                             target="_blank">
                             <button class="buy-btn">Pobierz JSON</button>
                         </a>
-                        <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                        <a class="charts"
+                            href="{% url 'show-charts' %}?rec={{ rec }}&notrec={{ notrec }}&neutral={{ neutral }}&star_1={{ star_1 }}&star_2={{ star_2 }}&star_3={{ star_3 }}&star_4={{ star_4 }}&star_5={{ star_5 }}"><img
+                                src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
                             wykresy</a>
                     </div>
                 </div>

@@ -36,6 +36,15 @@ def extraction(request):
             return render(request, 'scraper/extraction.html', {'title': 'Ekstrakcja opinii', 'message': 'Pole jest puste'})
 
         opinions_list = []
+        recomended = 0
+        notrecomended = 0
+        neutral = 0
+        star_1 = 0
+        star_2 = 0
+        star_3 = 0
+        star_4 = 0
+        star_5 = 0
+
         url_prefix = "https://www.ceneo.pl"
         url_postfix = "#tab=reviews"
         url = url_prefix+"/"+str(product_id)+url_postfix
@@ -80,7 +89,26 @@ def extraction(request):
             for opinion in opinions:
                 opinion_id = opinion["data-entry-id"]
                 author = opinion.find("div", "reviewer-name-line").string
+
                 stars = opinion.find("span", "review-score-count").string
+                index = stars.index('/')
+                stars = stars[:index]
+                print('--------------')
+                print(stars)
+                stars_round = float(stars.replace(',', '.'))
+                print(stars_round)
+                print('--------------')
+                if stars_round == 1 or stars_round == 0.5:
+                    star_1 += 1
+                elif stars_round == 2 or stars_round == 1.5:
+                    star_2 += 1
+                elif stars_round == 3 or stars_round == 2.5:
+                    star_3 += 1
+                elif stars_round == 4 or stars_round == 3.5:
+                    star_4 += 1
+                elif stars_round == 5 or stars_round == 4.5:
+                    star_5 += 1
+
                 dates = opinion.find("span", "review-time").find_all("time")
                 review_date = dates.pop(0)["datetime"]
                 useful = opinion.find("button", "vote-yes").find("span").string
@@ -98,6 +126,13 @@ def extraction(request):
                         "div", "product-review-summary").find("em").string
                 except AttributeError:
                     recommendation = None
+
+                if recommendation == 'Polecam':
+                    recomended += 1
+                elif recommendation == 'Nie polecam':
+                    notrecomended += 1
+                elif recommendation == None:
+                    neutral += 1
 
                 try:
                     purchase_date = dates.pop(0)["datetime"]
@@ -140,8 +175,14 @@ def extraction(request):
             except TypeError:
                 url = None
 
+        print(star_1)
+        print(star_2)
+        print(star_3)
+        print(star_4)
+        print(star_5)
+
         # Przekierowanie na stronę produktu
-        return render(request, 'scraper/single_product.html', {'opinions': opinions_list, 'product': product, 'title': 'Product', 'file': filee, 'filename': product_id})
+        return render(request, 'scraper/single_product.html', {'title': 'Product', 'opinions': opinions_list, 'product': product, 'file': filee, 'filename': product_id, 'rec': recomended, 'notrec': notrecomended, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5})
 
     # Przekierowanie na stronę ekstrakcji (czysty formularz)
     return render(request, 'scraper/extraction.html', {'title': 'Ekstrakcja opinii'})
@@ -155,3 +196,17 @@ def download_file(request):
     response['Content-Type'] = 'text/plain'
     response['Content-Disposition'] = f'attachment; filename={filename}'
     return response
+
+
+def show_charts(request):
+    rec = request.GET['rec']
+    notrec = request.GET['notrec']
+    neutral = request.GET['neutral']
+
+    star_1 = request.GET['star_1']
+    star_2 = request.GET['star_2']
+    star_3 = request.GET['star_3']
+    star_4 = request.GET['star_4']
+    star_5 = request.GET['star_5']
+
+    return render(request, 'scraper/charts.html', {'title': 'Wykresy', 'rec': rec, 'notrec': notrec, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5})
