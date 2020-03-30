@@ -6,8 +6,18 @@ import json
 from django.shortcuts import render
 from .models import Product
 from django.http import HttpResponse
-
+from django.views.generic import ListView, DetailView
 from scraper.models import Product
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'scraper/products.html'
+    context_object_name = 'products'
+
+
+class ProductDetailView(DetailView):
+    model = Product
 
 
 def home(request):
@@ -73,6 +83,7 @@ def extraction(request):
         product_category = page_tree.find("nav", "breadcrumbs").find_all("div")[
             2].find("span").string
         product_full_stars = int(round(product_score))
+        product_empty_stars = 5 - product_full_stars
         product_pros_number = 0
         product_cons_number = 0
 
@@ -82,8 +93,8 @@ def extraction(request):
             'product_price': product_price,
             'product_score': product_score,
             'product_category': product_category,
-            'product_full_stars': range(product_full_stars),
-            'product_empty_stars': range(5 - product_full_stars)
+            'product_full_stars': product_full_stars,
+            'product_empty_stars': product_empty_stars
         }
 
         # wydobycie składowych dla pojedynczej opinii
@@ -123,25 +134,25 @@ def extraction(request):
                     purchased = opinion.find(
                         "div", "product-review-pz").find("em").string
                 except AttributeError:
-                    purchased = None
+                    purchased = 'Brak'
 
                 try:
                     recommendation = opinion.find(
                         "div", "product-review-summary").find("em").string
                 except AttributeError:
-                    recommendation = None
+                    recommendation = 'Brak'
 
                 if recommendation == 'Polecam':
                     recomended += 1
                 elif recommendation == 'Nie polecam':
                     notrecomended += 1
-                elif recommendation == None:
+                elif recommendation == 'Brak':
                     neutral += 1
 
                 try:
                     purchase_date = dates.pop(0)["datetime"]
                 except IndexError:
-                    purchase_date = None
+                    purchase_date = 'Brak'
 
                 try:
                     pros = opinion.find(
@@ -150,7 +161,7 @@ def extraction(request):
                     pros = opinion.find(
                         "div", "pros-cell").find("ul").get_text()
                 except AttributeError:
-                    pros = None
+                    pros = 'Nie podano'
 
                 try:
                     cons = opinion.find(
@@ -159,7 +170,7 @@ def extraction(request):
                     cons = opinion.find(
                         "div", "cons-cell").find("ul").get_text()
                 except AttributeError:
-                    cons = None
+                    cons = 'Nie podano'
 
                 opinion_dict = {
                     "opinion_id": opinion_id,
@@ -177,7 +188,6 @@ def extraction(request):
                 }
 
                 opinions_list.append(opinion_dict)
-                filee = json.dumps(opinions_list)
 
             try:
                 url = url_prefix + \
@@ -185,18 +195,30 @@ def extraction(request):
             except TypeError:
                 url = None
 
+            filee = json.dumps(opinions_list)
+            opinions_number = len(opinions_list)
+
         # Zapisanie do bazy danych
         if to_save:
             if Product.objects.filter(ceneo_id=product_id).exists():
                 message = f'Produkt o id: "{product_id}" jest w bazie danych'
             else:
                 message = f'Produkt został zapisany w bazie danych'
-                product_object = Product(ceneo_id=product_id, name=product_name, img=product_img, average_rating=product_score,
-                                         opinions_number=len(opinions), pros_number=product_pros_number, cons_number=product_cons_number)
+                product_object = Product(ceneo_id=product_id,
+                                         name=product_name,
+                                         category=product_category,
+                                         img=product_img,
+                                         price=product_price,
+                                         average_rating=product_score,
+                                         opinions_number=opinions_number,
+                                         pros_number=product_pros_number,
+                                         cons_number=product_cons_number,
+                                         stars_full=product_full_stars,
+                                         stars_empty=product_empty_stars)
                 product_object.save()
 
         # Przekierowanie na stronę produktu
-        return render(request, 'scraper/single_product.html', {'title': 'Product', 'message': message, 'opinions': opinions_list, 'product': product, 'file': filee, 'filename': product_id, 'rec': recomended, 'notrec': notrecomended, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5})
+        return render(request, 'scraper/single_product.html', {'title': 'Product', 'message': message, 'opinions': opinions_list, 'product': product, 'file': filee, 'filename': product_id, 'rec': recomended, 'notrec': notrecomended, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5, 'full': product_full_stars, 'empty': product_empty_stars})
 
     # Przekierowanie na stronę ekstrakcji (czysty formularz)
     return render(request, 'scraper/extraction.html', {'title': 'Ekstrakcja opinii'})

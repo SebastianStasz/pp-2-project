@@ -16,21 +16,13 @@
 {% endblock head %}
 
 {% block content %}
-<!------ MAIN ------>
 <main>
-    {% if message %}
-    <section class="message">
-        <p>{{ message }}</p>
-    </section>
-    {% endif %}
-
     <section class="product">
         <p class="address-track">
             <a href="#">Oceneo</a> <span class="right-arrow">&#xFFEB;</span>
             <a href="#">Lista produktów</a> <span class="right-arrow">&#xFFEB;</span>
-            <a href="#">{{ product|get_value_from_dict:'product_category' }}</a> <span
-                class="right-arrow">&#xFFEB;</span>
-            <a href="#">{{ product|get_value_from_dict:'product_name' }}</a>
+            <a href="#">{{ object.category }}</a> <span class="right-arrow">&#xFFEB;</span>
+            <a href="#">{{ object.name }}</a>
         </p>
         <div class="product-wrapper">
             <div class="product-photos">
@@ -41,38 +33,35 @@
                     <img src="img/samsung-galaxy-s10e-4.jpg">
                 </div>-->
                 <div class="current-photo">
-                    <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    <img src="{{ object.img }}">
                 </div>
             </div>
             <div class="main-info">
                 <div class="desktop-center">
-                    <h2 class="product-name">{{ product|get_value_from_dict:'product_name' }}</h2>
+                    <h2 class="product-name">{{ object.name }}</h2>
                     <div class="product-rating">
                         <div class="rating-stars">
-                            {% if full != 0 %}
-                            {% for i in "x"|ljust:full %}
+                            {% if object.stars_full != 0 %}
+                            {% for i in "x"|ljust:object.stars_full %}
                             <img src="{% static 'scraper/icons/star.svg' %}">
                             {% endfor %}
                             {% endif %}
 
-                            {% if empty != 0 %}
-                            {% for i in "x"|ljust:empty %}
-                            <img src="{% static 'scraper/icons/star-empty.svg' %}">
+                            {% if object.stars_empty != 0 %}
+                            {% for i in "x"|ljust:object.stars_empty %}
+                            <img src="{% static 'scraper/icons/star.svg' %}">
                             {% endfor %}
                             {% endif %}
                         </div>
-                        <p class="main-rating">{{ product|get_value_from_dict:'product_score' }} / 5</p>
-                        <p class="ammount-of-feedback">{{ opinions|length }} opinii</p>
+                        <p class="main-rating">{{ object.average_rating }}</p>
+                        <p class="ammount-of-feedback">{{ object.opinions_number }} opinii</p>
                     </div>
                     <div class="product-purchase">
-                        <p class="price">{{ product|get_value_from_dict:'product_price' }},00 zł</p>
-                        <a href="{% url 'download-file' %}?filename=Oceneo - {{ filename }}.json&filedata={{ file }}"
-                            target="_blank">
+                        <p class="price">{{ object.price }},00 zł</p>
+                        <a href="#" target="_blank">
                             <button class="buy-btn">Pobierz JSON</button>
                         </a>
-                        <a class="charts"
-                            href="{% url 'show-charts' %}?rec={{ rec }}&notrec={{ notrec }}&neutral={{ neutral }}&star_1={{ star_1 }}&star_2={{ star_2 }}&star_3={{ star_3 }}&star_4={{ star_4 }}&star_5={{ star_5 }}"><img
-                                src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                        <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
                             wykresy</a>
                     </div>
                 </div>
@@ -96,28 +85,13 @@
                     <!--<th>Treść</th>-->
                 </tr>
             </thead>
-            <tbody>
-                {% for opinion in opinions %}
-                <tr>
-                    {% for key, value in opinion.items %}
-                    <td>{{value}}</td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
+
 
         </table>
 
     </section>
 </main>
 <script>
-    // Example Data
-    var dataSet = [
-        ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800", "Lorem", "Lorem", "Lorem"],
-        ["Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750", "Lorem", "Lorem", "Lorem"],
-        ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000", "Lorem", "Lorem", "Lorem"]
-    ];
-
     // Create Table
     $(document).ready(function () {
         $('#opinions-table').DataTable({
