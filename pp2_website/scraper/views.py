@@ -7,6 +7,8 @@ from django.shortcuts import render
 from .models import Product
 from django.http import HttpResponse
 
+from scraper.models import Product
+
 
 def home(request):
     return render(request, 'scraper/index.html', {'title': 'Strona główna'})
@@ -29,7 +31,9 @@ def singleProduct(request):
 
 
 def extraction(request):
+    message = ''
     if request.method == "POST":
+        to_save = request.POST.get("save", None)
         product_id = request.POST.get('web_link', None)
 
         if product_id == '':
@@ -64,10 +68,13 @@ def extraction(request):
             "a", "js_image-preview").find("img")['src']
         product_price = page_tree.find(
             "span", "price").find("span", "value").string
-        product_score = page_tree.find("span", "product-score").text[:3]
+        product_score = float(page_tree.find(
+            "span", "product-score").text[:3].replace(',', '.'))
         product_category = page_tree.find("nav", "breadcrumbs").find_all("div")[
             2].find("span").string
-        product_full_stars = int(round(float(product_score.replace(',', '.'))))
+        product_full_stars = int(round(product_score))
+        product_pros_number = 0
+        product_cons_number = 0
 
         product = {
             'product_name': product_name,
@@ -93,11 +100,8 @@ def extraction(request):
                 stars = opinion.find("span", "review-score-count").string
                 index = stars.index('/')
                 stars = stars[:index]
-                print('--------------')
-                print(stars)
                 stars_round = float(stars.replace(',', '.'))
-                print(stars_round)
-                print('--------------')
+
                 if stars_round == 1 or stars_round == 0.5:
                     star_1 += 1
                 elif stars_round == 2 or stars_round == 1.5:
@@ -141,11 +145,17 @@ def extraction(request):
 
                 try:
                     pros = opinion.find(
+                        "div", "pros-cell").find("ul")
+                    product_pros_number += len(pros.find_all("li"))
+                    pros = opinion.find(
                         "div", "pros-cell").find("ul").get_text()
                 except AttributeError:
                     pros = None
 
                 try:
+                    cons = opinion.find(
+                        "div", "cons-cell").find("ul")
+                    product_cons_number += len(cons.find_all("li"))
                     cons = opinion.find(
                         "div", "cons-cell").find("ul").get_text()
                 except AttributeError:
@@ -175,14 +185,18 @@ def extraction(request):
             except TypeError:
                 url = None
 
-        print(star_1)
-        print(star_2)
-        print(star_3)
-        print(star_4)
-        print(star_5)
+        # Zapisanie do bazy danych
+        if to_save:
+            if Product.objects.filter(ceneo_id=product_id).exists():
+                message = f'Produkt o id: "{product_id}" jest w bazie danych'
+            else:
+                message = f'Produkt został zapisany w bazie danych'
+                product_object = Product(ceneo_id=product_id, name=product_name, img=product_img, average_rating=product_score,
+                                         opinions_number=len(opinions), pros_number=product_pros_number, cons_number=product_cons_number)
+                product_object.save()
 
         # Przekierowanie na stronę produktu
-        return render(request, 'scraper/single_product.html', {'title': 'Product', 'opinions': opinions_list, 'product': product, 'file': filee, 'filename': product_id, 'rec': recomended, 'notrec': notrecomended, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5})
+        return render(request, 'scraper/single_product.html', {'title': 'Product', 'message': message, 'opinions': opinions_list, 'product': product, 'file': filee, 'filename': product_id, 'rec': recomended, 'notrec': notrecomended, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5})
 
     # Przekierowanie na stronę ekstrakcji (czysty formularz)
     return render(request, 'scraper/extraction.html', {'title': 'Ekstrakcja opinii'})

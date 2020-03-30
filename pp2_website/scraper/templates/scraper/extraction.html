@@ -9,10 +9,11 @@
         <form class="product-id" action="{% url 'scraper-extraction' %}" , method="POST">
             {% csrf_token %}
             <label>Wpisz ID szukanego produktu: <input type="text" class="product-id-input" name="web_link"></label>
+            <label>Czy zapisać w bazie danych?</label><input type="radio" name="save" value="true"></label>
             <div class="buttons">
                 <input class="product-id-clear" type="reset" value="Wyczyść">
-                <input type="submit" name="submit" value="OKKK">
-                <button class="product-id-btn">Szukaj</button>
+
+                <button type="submit" name="submit" class="product-id-btn">Szukaj</button>
             </div>
         </form>
 
