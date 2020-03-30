@@ -27,7 +27,7 @@
     <div class="wrapper">
         <!------ HEADER ------>
         <header>
-            <h1 class="logo"><a href="#">Oceneo</a></h1>
+            <h1 class="logo"><a href="{% url 'scraper-home' %}">Oceneo</a></h1>
             <div class="menu">
                 <div class="search-field">
                     <img class="search-icon" src="{% static 'scraper/icons/search.svg' %}">
@@ -36,7 +36,7 @@
                 <div class="account-log-reg">
                     <a class="login-btn" href="#">Zaloguj</a>
                     <a class="register-btn" href="#">Rejestracja</a></div>
-                <button class="nav-btn"><img src="{% static '   scraper/icons/open-nav.svg' %}"></button>
+                <button class="nav-btn"><img src="{% static 'scraper/icons/open-nav.svg' %}"></button>
             </div>
             <!------ NAVIGATION ------>
             <nav class="side-nav">

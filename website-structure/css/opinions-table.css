@@ -3,3 +3,11 @@
     margin-top: 50px;
     overflow: scroll;
 }
+
+th {
+    font-size: 14px;
+}
+
+td {
+    font-size: 13px;
+}

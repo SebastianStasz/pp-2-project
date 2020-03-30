@@ -18,6 +18,12 @@
 {% block content %}
 <!------ MAIN ------>
 <main>
+    {% if message %}
+    <section class="message">
+        <p>{{ message }}</p>
+    </section>
+    {% endif %}
+
     <section class="product">
         <p class="address-track">
             <a href="#">Oceneo</a> <span class="right-arrow">&#xFFEB;</span>
@@ -99,12 +105,6 @@
         </table>
 
     </section>
-
-    {% if message %}
-    {{ message }}
-    {% endif %}
-
-
 </main>
 <script>
     // Example Data

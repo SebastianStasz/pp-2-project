@@ -420,6 +420,18 @@ section.description form.product-id {
       -ms-flex-direction: column;
           flex-direction: column;
   color: #555555;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+section.description form.product-id .checkbox-input-div {
+  margin-top: 20px;
+}
+
+section.description form.product-id .checkbox-input {
+  margin-left: 20px;
 }
 
 section.description form.product-id .buttons {
@@ -540,7 +552,6 @@ section.product .product-photos .choose-photos img:hover {
 }
 
 section.product .current-photo {
-  height: 100%;
   width: 228px;
 }
 
@@ -787,6 +798,65 @@ section.products-list article.product-wrapper .product-purchase .disadvantages {
 @media (min-width: 800px) {
   section.description {
     padding: 25px 80px;
+  }
+  section.product .main-info .desktop-center {
+    min-width: 400px;
+  }
+}
+
+section.message {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  background: rgba(7, 228, 14, 0.5);
+  padding: 15px 30px;
+  -webkit-animation: pop-up 4s;
+          animation: pop-up 4s;
+}
+
+@-webkit-keyframes pop-up {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes pop-up {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 0;
   }
 }
 /*# sourceMappingURL=main.css.map */

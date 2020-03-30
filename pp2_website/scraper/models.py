@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Product(models.Model):
-    ceneo_id = models.PositiveIntegerField()
+    ceneo_id = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     img = models.CharField(max_length=150)
     average_rating = models.FloatField()

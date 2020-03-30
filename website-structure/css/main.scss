@@ -405,6 +405,16 @@ section.description {
         display: flex;
         flex-direction: column;
         color: $light-gray;
+        user-select: none;
+
+        .checkbox-input-div {
+            margin-top: 20px;
+        }
+
+        .checkbox-input {
+            margin-left: 20px;
+        }
+
 
         .buttons {
             display: flex;
@@ -508,7 +518,6 @@ section.product {
     }
 
     .current-photo {
-        height: 100%;
         width: 228px;
 
         img {
@@ -757,5 +766,45 @@ section.products-list {
 @media (min-width: 800px) {
     section.description {
         padding: 25px 80px;
+    }
+
+    section.product {
+        .main-info {
+            .desktop-center {
+                min-width: 400px;
+            }
+        }
+    }
+}
+
+// MESSAGE POP UP WINDOW
+section.message {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    background: rgba(7, 228, 14, .5);
+    padding: 15px 30px;
+    animation: pop-up 4s;
+}
+
+@keyframes pop-up {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
     }
 }

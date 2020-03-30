@@ -4,24 +4,25 @@
 {% block content %}
 <!------ MAIN ------>
 <main>
+    {% if message %}
+    <section class="message">
+        <p>{{ message }}</p>
+    </section>
+    {% endif %}
     <section class="description">
         <h2>Ekstrakcja opinii</h2>
         <form class="product-id" action="{% url 'scraper-extraction' %}" , method="POST">
             {% csrf_token %}
             <label>Wpisz ID szukanego produktu: <input type="text" class="product-id-input" name="web_link"></label>
-            <label>Czy zapisać w bazie danych?</label><input type="radio" name="save" value="true"></label>
+            <div class="checkbox-input-div">
+                <label>Czy zapisać w bazie danych?<input class="checkbox-input" type="checkbox" name="save"
+                        value="true"></label>
+            </div>
             <div class="buttons">
                 <input class="product-id-clear" type="reset" value="Wyczyść">
-
                 <button type="submit" name="submit" class="product-id-btn">Szukaj</button>
             </div>
         </form>
-
-        {% if message %}
-        <div class="output">
-            <h2>{{ message }}</h2>
-        </div>
-        {% endif %}
 
         {% if opinions%}
         <div class="output">
