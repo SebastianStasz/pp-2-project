@@ -1,6 +1,20 @@
 from django.db import models
 
 
+class Opinion(models.Model):
+    opinion_id = models.PositiveIntegerField()
+    author = models.CharField(max_length=100)
+    recomendation = models.CharField(max_length=100)
+    stars = models.FloatField()
+    pros = models.CharField(max_length=100)
+    cons = models.CharField(max_length=100)
+    purchased = models.CharField(max_length=100)
+    purchase_date = models.CharField(max_length=100)
+    review_date = models.CharField(max_length=100)
+    usefull = models.CharField(max_length=100)
+    useless = models.CharField(max_length=100)
+
+
 class Product(models.Model):
     # Ogólne informacje
     ceneo_id = models.CharField(max_length=100)
@@ -28,6 +42,8 @@ class Product(models.Model):
     recomended = models.PositiveIntegerField()
     notrecomended = models.PositiveIntegerField()
     neutral = models.PositiveIntegerField()
+
+    opinions = models.ManyToManyField(Opinion, blank=True)
 
     def __str__(self):
         return self.name

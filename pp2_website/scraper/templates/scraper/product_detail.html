@@ -58,7 +58,7 @@
                     </div>
                     <div class="product-purchase">
                         <p class="price">{{ object.price }},00 zł</p>
-                        <a href="#" target="_blank">
+                        <a href="{% url 'product-download' %}?product_id={{ object.pk }}" target="_blank">
                             <button class="buy-btn">Pobierz JSON</button>
                         </a>
                         <a class="charts" href="{% url 'product-charts' product.id %}">
@@ -86,7 +86,23 @@
                     <!--<th>Treść</th>-->
                 </tr>
             </thead>
-
+            <tbody>
+                {% for opinion in object.opinions.all %}
+                <tr>
+                    <td>{{opinion.opinion_id}}</td>
+                    <td>{{opinion.author}}</td>
+                    <td>{{opinion.recomendation}}</td>
+                    <td>{{opinion.stars}}</td>
+                    <td>{{opinion.pros}}</td>
+                    <td>{{opinion.cons}}</td>
+                    <td>{{opinion.purchased}}</td>
+                    <td>{{opinion.purchase_date}}</td>
+                    <td>{{opinion.review_date}}</td>
+                    <td>{{opinion.usefull}}</td>
+                    <td>{{opinion.useless}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
 
         </table>
 

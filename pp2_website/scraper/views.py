@@ -7,7 +7,8 @@ from django.shortcuts import render
 from .models import Product
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
-from scraper.models import Product
+from scraper.models import Product, Opinion
+from django.core import serializers
 
 
 class ProductListView(ListView):
@@ -23,6 +24,18 @@ class ProductDetailView(DetailView):
 class ProductChartslView(DetailView):
     model = Product
     template_name = 'scraper/product-charts.html'
+
+
+def productDownload(request):
+    product_id = request.GET['product_id']
+    product = Product.objects.get(pk=product_id)
+    opinion_list = product.opinions.all()
+
+    filedata = serializers.serialize('json', opinion_list)
+    response = HttpResponse(filedata)
+    response['Content-Type'] = 'text/plain'
+    response['Content-Disposition'] = f'attachment; filename=Oceneo - {product_id}.json'
+    return response
 
 
 def home(request):
@@ -206,8 +219,9 @@ def extraction(request):
         # Zapisanie do bazy danych
         if to_save:
             if Product.objects.filter(ceneo_id=product_id).exists():
-                message = f'Produkt o id: "{product_id}" jest w bazie danych'
+                message = f'Ten produkt jest w bazie danych'
             else:
+                # Produkt
                 message = f'Produkt został zapisany w bazie danych'
                 product_object = Product(ceneo_id=product_id,
                                          name=product_name,
@@ -229,6 +243,23 @@ def extraction(request):
                                          star_4=star_4,
                                          star_5=star_5,)
                 product_object.save()
+
+                # Opinie
+                for opinion in opinions_list:
+                    opinion_object = Opinion(
+                        opinion_id=opinion.get('opinion_id'),
+                        author=opinion.get('author'),
+                        recomendation=opinion.get('recommendation'),
+                        stars=opinion.get('stars'),
+                        pros=opinion.get('pros'),
+                        cons=opinion.get('cons'),
+                        purchased=opinion.get('purchased'),
+                        purchase_date=opinion.get('purchase_date'),
+                        review_date=opinion.get('review_date'),
+                        usefull=opinion.get('useful'),
+                        useless=opinion.get('useless'),)
+                    opinion_object.save()
+                    product_object.opinions.add(opinion_object)
 
         # Przekierowanie na stronę produktu
         return render(request, 'scraper/single_product.html', {'title': 'Product', 'message': message, 'opinions': opinions_list, 'product': product, 'file': filee, 'filename': product_id, 'rec': recomended, 'notrec': notrecomended, 'neutral': neutral, 'star_1': star_1, 'star_2': star_2, 'star_3': star_3, 'star_4': star_4, 'star_5': star_5, 'full': product_full_stars, 'empty': product_empty_stars})
