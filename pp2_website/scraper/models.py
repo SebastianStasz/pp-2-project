@@ -13,6 +13,7 @@ class Opinion(models.Model):
     review_date = models.CharField(max_length=100)
     usefull = models.CharField(max_length=100)
     useless = models.CharField(max_length=100)
+    content = models.TextField()
 
 
 class Product(models.Model):

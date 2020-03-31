@@ -194,7 +194,7 @@ def extraction(request):
                     "opinion_id": opinion_id,
                     "author": author,
                     "recommendation": recommendation,
-                    "stars": stars,
+                    "stars": stars_round,
                     "pros": pros,
                     "cons": cons,
                     "purchased": purchased,
@@ -202,7 +202,7 @@ def extraction(request):
                     "review_date": review_date,
                     "useful": useful,
                     "useless": useless,
-                    # "content": content
+                    "content": content
                 }
 
                 opinions_list.append(opinion_dict)
