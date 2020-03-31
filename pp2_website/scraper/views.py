@@ -20,6 +20,11 @@ class ProductDetailView(DetailView):
     model = Product
 
 
+class ProductChartslView(DetailView):
+    model = Product
+    template_name = 'scraper/product-charts.html'
+
+
 def home(request):
     return render(request, 'scraper/index.html', {'title': 'Strona główna'})
 
@@ -214,7 +219,15 @@ def extraction(request):
                                          pros_number=product_pros_number,
                                          cons_number=product_cons_number,
                                          stars_full=product_full_stars,
-                                         stars_empty=product_empty_stars)
+                                         stars_empty=product_empty_stars,
+                                         recomended=recomended,
+                                         notrecomended=notrecomended,
+                                         neutral=neutral,
+                                         star_1=star_1,
+                                         star_2=star_2,
+                                         star_3=star_3,
+                                         star_4=star_4,
+                                         star_5=star_5,)
                 product_object.save()
 
         # Przekierowanie na stronę produktu

@@ -25,7 +25,8 @@
                     <div class="product-purchase">
                         <p class="disadvantages">Wady: {{ product.cons_number }}</p>
                         <button class="buy-btn">Pobierz JSON</button>
-                        <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                        <a class="charts" href="{% url 'product-charts' product.id %}"><img
+                                src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
                             wykresy</a>
                     </div>
                 </div>

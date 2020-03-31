@@ -61,7 +61,8 @@
                         <a href="#" target="_blank">
                             <button class="buy-btn">Pobierz JSON</button>
                         </a>
-                        <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                        <a class="charts" href="{% url 'product-charts' product.id %}">
+                            <img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
                             wykresy</a>
                     </div>
                 </div>
