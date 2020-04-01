@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import pprint
 import json
 
 from django.shortcuts import render
@@ -257,7 +256,8 @@ def extraction(request):
                         purchase_date=opinion.get('purchase_date'),
                         review_date=opinion.get('review_date'),
                         usefull=opinion.get('useful'),
-                        useless=opinion.get('useless'),)
+                        useless=opinion.get('useless'),
+                        content=opinion.get('content'))
                     opinion_object.save()
                     product_object.opinions.add(opinion_object)
 
@@ -274,7 +274,7 @@ def download_file(request):
 
     response = HttpResponse(filedata)
     response['Content-Type'] = 'text/plain'
-    response['Content-Disposition'] = f'attachment; filename={filename}'
+    response['Content-Disposition'] = f'attachment; filename={filename}.json'
     return response
 
 

@@ -100,7 +100,9 @@
                 {% for opinion in opinions %}
                 <tr>
                     {% for key, value in opinion.items %}
-                    <td>{{value}}</td>
+                    <td>
+                        <div class="td td-hide">{{value}}</div>
+                    </td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -120,6 +122,26 @@
             "info": false
         });
     });
+
+    // Wszystkie komórki
+    const cells = document.querySelectorAll('.td');
+
+    cells.forEach(cell => {
+        if (cell.offsetHeight < 100) cell.classList.remove('td-hide')
+    })
+
+    // Komórki o wysokości 100 lub więcej
+    const big_cells = document.querySelectorAll('.td-hide')
+
+    big_cells.forEach(cell => {
+        cell.addEventListener('mouseover', () => {
+            cell.classList.remove('td-hide')
+        })
+
+        cell.addEventListener('mouseout', () => {
+            cell.classList.add('td-hide')
+        })
+    })
 </script>
 
 {% endblock content %}

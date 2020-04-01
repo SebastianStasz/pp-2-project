@@ -901,3 +901,9 @@ section.message {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+.td-hide {
+    max-height: 100px;
+    overflow: hidden;
+    background: rgba(171, 31, 31, 0.2);
+}
