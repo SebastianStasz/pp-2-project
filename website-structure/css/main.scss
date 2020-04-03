@@ -493,10 +493,11 @@ section.product {
             display: none;
             overflow: scroll;
             margin-right: 40px;
+            width: 60px;
 
             img {
-                width: 60px;
-                height: 60px;
+                width: 100%;
+                height: auto;
                 padding: 2px;
                 margin: 3px 0;
                 cursor: pointer;

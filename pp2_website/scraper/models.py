@@ -22,6 +22,9 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     img = models.CharField(max_length=150)
+    min_img_1 = models.CharField(max_length=150)
+    min_img_2 = models.CharField(max_length=150)
+    min_img_3 = models.CharField(max_length=150)
     price = models.CharField(max_length=100)
 
     # Opinie

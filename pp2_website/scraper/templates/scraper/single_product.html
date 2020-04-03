@@ -13,6 +13,9 @@
 <script type="text/javascript" charset="utf8"
     src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
+<script defer src="{% static 'scraper/js/table-content.js' %}"></script>
+<script defer src="{% static 'scraper/js/photos.js' %}"></script>
+
 {% endblock head %}
 
 {% block content %}
@@ -34,12 +37,12 @@
         </p>
         <div class="product-wrapper">
             <div class="product-photos">
-                <!--<div class="choose-photos">
-                    <img src="img/samsung-galaxy-s10e-1.jpg">
-                    <img src="img/samsung-galaxy-s10e-2.jpg">
-                    <img src="img/samsung-galaxy-s10e-3.jpg">
-                    <img src="img/samsung-galaxy-s10e-4.jpg">
-                </div>-->
+                <div class="choose-photos">
+                    <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    {% for img in product|get_value_from_dict:'product_min_img' %}
+                    <img src="http:{{ img }}">
+                    {% endfor %}
+                </div>
                 <div class="current-photo">
                     <img src="http:{{ product|get_value_from_dict:'product_img' }}">
                 </div>
@@ -101,7 +104,7 @@
                 <tr>
                     {% for key, value in opinion.items %}
                     <td>
-                        <div class="td td-hide">{{value}}</div>
+                        <div class="td">{{value}}</div>
                     </td>
                     {% endfor %}
                 </tr>
@@ -114,7 +117,7 @@
 </main>
 <script>
 
-    // Create Table
+    // Tworzenie tabeli
     $(document).ready(function () {
         $('#opinions-table').DataTable({
             "paging": true,
@@ -122,26 +125,6 @@
             "info": false
         });
     });
-
-    // Wszystkie komórki
-    const cells = document.querySelectorAll('.td');
-
-    cells.forEach(cell => {
-        if (cell.offsetHeight < 100) cell.classList.remove('td-hide')
-    })
-
-    // Komórki o wysokości 100 lub więcej
-    const big_cells = document.querySelectorAll('.td-hide')
-
-    big_cells.forEach(cell => {
-        cell.addEventListener('mouseover', () => {
-            cell.classList.remove('td-hide')
-        })
-
-        cell.addEventListener('mouseout', () => {
-            cell.classList.add('td-hide')
-        })
-    })
 </script>
 
 {% endblock content %}

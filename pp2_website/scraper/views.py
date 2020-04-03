@@ -90,9 +90,20 @@ def extraction(request):
         opinions = opinions_ul.find_all("li", "review-box")
 
         # wydobycie składowych dla produktu
-        product_name = page_tree.find("h1", "product-name").string
+        product_name = page_tree.find("h1", "product-name").text
+
         product_img = page_tree.find(
             "a", "js_image-preview").find("img")['src']
+        product_img_list = page_tree.find(
+            "ul", "js_product-pictures-miniatures").find_all("a")
+        product_img_list.pop(0)
+        product_min_img_list = []
+
+        for el in product_img_list:
+            product_min_img_list.append(el['href'])
+            if len(product_min_img_list) == 3:
+                break
+
         product_price = page_tree.find(
             "span", "price").find("span", "value").string
         product_score = float(page_tree.find(
@@ -107,6 +118,7 @@ def extraction(request):
         product = {
             'product_name': product_name,
             'product_img': product_img,
+            'product_min_img': product_min_img_list,
             'product_price': product_price,
             'product_score': product_score,
             'product_category': product_category,
@@ -226,6 +238,9 @@ def extraction(request):
                                          name=product_name,
                                          category=product_category,
                                          img=product_img,
+                                         min_img_1=product_min_img_list[0],
+                                         min_img_2=product_min_img_list[1],
+                                         min_img_3=product_min_img_list[2],
                                          price=product_price,
                                          average_rating=product_score,
                                          opinions_number=opinions_number,

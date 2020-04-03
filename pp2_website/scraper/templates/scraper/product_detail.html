@@ -13,6 +13,9 @@
 <script type="text/javascript" charset="utf8"
     src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
+<script defer src="{% static 'scraper/js/table-content.js' %}"></script>
+<script defer src="{% static 'scraper/js/photos.js' %}"></script>
+
 {% endblock head %}
 
 {% block content %}
@@ -26,12 +29,12 @@
         </p>
         <div class="product-wrapper">
             <div class="product-photos">
-                <!--<div class="choose-photos">
-                    <img src="img/samsung-galaxy-s10e-1.jpg">
-                    <img src="img/samsung-galaxy-s10e-2.jpg">
-                    <img src="img/samsung-galaxy-s10e-3.jpg">
-                    <img src="img/samsung-galaxy-s10e-4.jpg">
-                </div>-->
+                <div class="choose-photos">
+                    <img src="{{ object.img }}">
+                    <img src="{{ object.min_img_1 }}">
+                    <img src="{{ object.min_img_2 }}">
+                    <img src="{{ object.min_img_3 }}">
+                </div>
                 <div class="current-photo">
                     <img src="{{ object.img }}">
                 </div>
@@ -89,18 +92,42 @@
             <tbody>
                 {% for opinion in object.opinions.all %}
                 <tr>
-                    <td>{{opinion.opinion_id}}</td>
-                    <td>{{opinion.author}}</td>
-                    <td>{{opinion.recomendation}}</td>
-                    <td>{{opinion.stars}}</td>
-                    <td>{{opinion.pros}}</td>
-                    <td>{{opinion.cons}}</td>
-                    <td>{{opinion.purchased}}</td>
-                    <td>{{opinion.purchase_date}}</td>
-                    <td>{{opinion.review_date}}</td>
-                    <td>{{opinion.usefull}}</td>
-                    <td>{{opinion.useless}}</td>
-                    <td>{{opinion.content}}</td>
+                    <td>
+                        <div class="td">{{opinion.opinion_id}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.author}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.recomendation}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.stars}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.pros}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.cons}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.purchased}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.purchase_date}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.review_date}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.usefull}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.useless}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.content}}</div>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -110,12 +137,23 @@
     </section>
 </main>
 <script>
-    // Create Table
+    // Tworzenie tabeli
     $(document).ready(function () {
         $('#opinions-table').DataTable({
             "paging": true,
             "ordering": true,
             "info": false
+        });
+    });
+
+
+    // Zmiana zdjęć
+    const current_photo = document.querySelector('.current-photo').querySelector('img');
+    const choose_photos = document.querySelector('.choose-photos').querySelectorAll('img');
+
+    choose_photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            current_photo.src = photo.src;
         });
     });
 </script>

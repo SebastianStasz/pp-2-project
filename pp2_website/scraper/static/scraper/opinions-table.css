@@ -12,8 +12,12 @@ td {
     font-size: 13px;
 }
 
+.td {
+    transition: all .2s ease-in-out;
+}
+
 .td-hide {
     max-height: 100px;
     overflow: hidden;
-    background: rgba(171, 31, 31, 0.5);
+    background: rgba(171, 31, 31, 0.2);
 }
