@@ -1,17 +1,34 @@
 {% extends "scraper/base.html"%}
+{% load djutils %}
 
 {% block content %}
 <!------ MAIN ------>
 <main>
+    {% if message %}
+    <section class="message">
+        <p>{{ message }}</p>
+    </section>
+    {% endif %}
     <section class="description">
         <h2>Ekstrakcja opinii</h2>
-        <form class="product-id">
-            <label>Wpisz ID szukanego produktu: <input type="text" class="product-id-input"></label>
+        <form class="product-id" action="{% url 'scraper-extraction' %}" , method="POST">
+            {% csrf_token %}
+            <label>Wpisz ID szukanego produktu: <input type="text" class="product-id-input" name="web_link"></label>
+            <div class="checkbox-input-div">
+                <label>Czy zapisać w bazie danych?<input class="checkbox-input" type="checkbox" name="save"
+                        value="true"></label>
+            </div>
             <div class="buttons">
                 <input class="product-id-clear" type="reset" value="Wyczyść">
-                <button class="product-id-btn">Szukaj</button>
+                <button type="submit" name="submit" class="product-id-btn">Szukaj</button>
             </div>
         </form>
+
+        {% if opinions%}
+        <div class="output">
+            <h2>{{ opinions }}</h2>
+        </div>
+        {% endif %}
     </section>
 </main>
 {% endblock content %}

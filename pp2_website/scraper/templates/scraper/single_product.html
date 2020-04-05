@@ -1,0 +1,138 @@
+{% extends "scraper/base.html"%}
+{% load static %}
+{% load djutils %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'scraper/opinions-table.css' %}">
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8"
+    src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script defer src="{% static 'scraper/js/table-content.js' %}"></script>
+<script defer src="{% static 'scraper/js/photos.js' %}"></script>
+
+{% endblock head %}
+
+{% block content %}
+<!------ MAIN ------>
+<main>
+    {% if message %}
+    <section class="message">
+        <p>{{ message }}</p>
+    </section>
+    {% endif %}
+
+    <section class="product">
+        <p class="address-track">
+            <a href="#">Oceneo</a> <span class="right-arrow">&#xFFEB;</span>
+            <a href="#">Lista produktów</a> <span class="right-arrow">&#xFFEB;</span>
+            <a href="#">{{ product|get_value_from_dict:'product_category' }}</a> <span
+                class="right-arrow">&#xFFEB;</span>
+            <a href="#">{{ product|get_value_from_dict:'product_name' }}</a>
+        </p>
+        <div class="product-wrapper">
+            <div class="product-photos">
+                <div class="choose-photos">
+                    <div class="photo">
+                        <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    </div>
+                    {% for img in product|get_value_from_dict:'product_min_img' %}
+                    {% if img != None %}
+                    <div class="photo">
+                        <img src="http:{{ img }}">
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="current-photo">
+                    <div class="photo">
+                        <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="main-info">
+                <div class="desktop-center">
+                    <h2 class="product-name">{{ product|get_value_from_dict:'product_name' }}</h2>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            {% if full != 0 %}
+                            {% for i in "x"|ljust:full %}
+                            <img src="{% static 'scraper/icons/star.svg' %}">
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if empty != 0 %}
+                            {% for i in "x"|ljust:empty %}
+                            <img src="{% static 'scraper/icons/star-empty.svg' %}">
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <p class="main-rating">{{ product|get_value_from_dict:'product_score' }} / 5</p>
+                        <p class="ammount-of-feedback">{{ opinions|length }} opinii</p>
+                    </div>
+                    <div class="product-purchase">
+                        <p class="price">{{ product|get_value_from_dict:'product_price' }},00 zł</p>
+                        <a href="{% url 'download-file' %}?filename=Oceneo - {{ filename }}.json&filedata={{ file }}"
+                            target="_blank">
+                            <button class="buy-btn">Pobierz JSON</button>
+                        </a>
+                        <a class="charts"
+                            href="{% url 'show-charts' %}?rec={{ rec }}&notrec={{ notrec }}&neutral={{ neutral }}&star_1={{ star_1 }}&star_2={{ star_2 }}&star_3={{ star_3 }}&star_4={{ star_4 }}&star_5={{ star_5 }}"><img
+                                src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                            wykresy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="opinions-table" class="display opinions-table" width="100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Autor</th>
+                    <th>Rekomendacja</th>
+                    <th>Gwiazdki</th>
+                    <th>Zalety</th>
+                    <th>Wady</th>
+                    <th>PZ</th>
+                    <th>Zakupiono</th>
+                    <th>Dodano</th>
+                    <th>Like</th>
+                    <th>Dislike</th>
+                    <th>Treść</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for opinion in opinions %}
+                <tr>
+                    {% for key, value in opinion.items %}
+                    <td>
+                        <div class="td">{{value}}</div>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </section>
+</main>
+<script>
+
+    // Tworzenie tabeli
+    $(document).ready(function () {
+        $('#opinions-table').DataTable({
+            "paging": true,
+            "ordering": true,
+            "info": false
+        });
+    });
+</script>
+
+{% endblock content %}

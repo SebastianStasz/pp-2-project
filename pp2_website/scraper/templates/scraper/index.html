@@ -6,41 +6,54 @@
     <section class="description">
         <h2>Opis projektu</h2>
 
-        <h6 class="first">Cel projektu</h6>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis recusandae eveniet, expedita
-            laudantium asperiores optio tempore blanditiis reiciendis eaque sit doloribus fuga id, sequi quae
-            iste praesentium debitis ab necessitatibus.
-            Distinctio maiores minima deleniti pariatur perferendis nulla odit et ipsum quia expedita impedit
-            architecto, nobis mollitia delectus. Praesentium architecto, voluptatum accusamus, facere dict.</p>
+        <h6 class="first">Cel aplikacji</h6>
+        <p>Celem projektu było napisanie aplikacji webowej służącej do pobierania opinii oraz informacji o produkcie z
+            serwisu Ceneo.pl, którego ID zostało wpisane w formularzu. Aplikacja musiała też pozwalać na wyświetlenie
+            pobranych danych, oraz podstawowych statystyk podsumowujących oceny użytkowników.</p>
+
+        <p class="same-paragraph">Realizacja tego projektu zaliczeniowego umożliwiła poznanie frameworka do tworzenia
+            aplikacji webowych jakim jest Django, a także dostępnych w nim modułów.</p>
 
         <h6>Opis działania aplikacji</h6>
-        <p>Celem tego projektu jest Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur corporis
-            quisquam aliquam quia atque quos deleniti veritatis nostrum omnis facilis! Voluptates corporis
-            mollitia architecto facere illo, quos aliquam nisi laboriosam?Dolorum.</p>
+        <p>Po uruchomieniu serwera i wejściu na stronę "localhost" zostajemy przekierowani do głównej strony witryny
+            zawierającej opis działania oraz cel aplikacji. W górnej części widzimy header z przykładowymi opcjami. Po
+            lewej stronie znajduje się wysuwane menu.</p>
 
-        <p class="same-paragraph">Celem tego projektu jest Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Tenetur corporis
-            quisquam aliquam quia atque quos deleniti veritatis nostrum omnis facilis! Voluptates corporis
-            mollitia architecto facere illo, quos aliquam nisi laboriosam?Dolorum.</p>
+        <p class="same-paragraph">Po przejściu do strony "Ekstrakcja opinii" widzimy formularz z obszarem do podania ID
+            szukanego produktu, oraz pole wyboru które zaznaczamy jeżeli chcemy aby produkt został zapisany w bazie
+            danych. W przypadku podania błędnego ID, na ekranie pojawia się informujący o tym komunikat. Po wpisaniu
+            poprawego identyfikatora zostajemy przeniesieni na stronę produktu. Zaznaczenie opcji zapisu w bazie danych
+            powoduje wyświetlenie komunikatu o poprawnym zapisie, jeżeli operacja przebiegła pomyślnie lub informacji o
+            tym że produkt o podanym ID znajduje się już w bazie danych.</p>
+
+        <p class="same-paragraph">Zakładka "Lista produktów" zawiera listę produktów, które zostały zapisane w bazie
+            danych. Oprócz zdjęcia produktu widzimy jego nazwę, liczbę opinii, średnią ocenę, liczbę wad oraz zalet. Z
+            tego widoku możemy też przejść na stronę z wykresami, a także pobrać opinie w formie pliku json.</p>
+
+        <p class="same-paragraph">Strona "pojedyńczego produktu" umożliwia wyświetlenie pobranych informacji (zdjęcia,
+            liczbę gwiazdek, średnią ocenę, liczbę opinii oraz cenę). Kolejną sekcją jest tabela przedstawiająca opinie
+            użytkowników z serwisu Ceneo. Przycisk "Pobierz JSON" służy do pobrania opinii w formie pliku json. Odnośnik
+            "Zobacz wykresy" przenosi nas na stronę z wykresami podsumowującymi oceny użytkowników.</p>
+
 
         <div class="lists">
             <div>
                 <h6>Zastosowane biblioteki</h6>
                 <ul>
-                    <li>DataTables</li>
-                    <li>BS4</li>
-                    <li>Requests</li>
-                    <li>Bear</li>
+                    <li>Requests (python)</li>
+                    <li>BeautifulSoup (python)</li>
+                    <li>Json (python)</li>
+                    <li>DataTables (javascript)</li>
+                    <li>Chart.js (javascript)</li>
                 </ul>
             </div>
 
             <div class="second-list">
                 <h6>Zastosowane podejścia</h6>
                 <ul>
-                    <li>Django</li>
-                    <li>BS4</li>
-                    <li>Requests</li>
-                    <li>Bear</li>
+                    <li>Obiektowe - obiekty bazy danych, GenericViews: tworzenie widoków o często powtarzającej się
+                        funkcjonalności. </li>
+                    <li>Strukturalne - trasy, podstawowe funkcje.</li>
                 </ul>
             </div>
         </div>

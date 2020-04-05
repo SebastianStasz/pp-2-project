@@ -1,0 +1,155 @@
+{% extends "scraper/base.html"%}
+{% load static %}
+{% load djutils %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'scraper/opinions-table.css' %}">
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8"
+    src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script defer src="{% static 'scraper/js/table-content.js' %}"></script>
+<script defer src="{% static 'scraper/js/photos.js' %}"></script>
+
+{% endblock head %}
+
+{% block content %}
+<main>
+    <section class="product">
+        <p class="address-track">
+            <a href="#">Oceneo</a> <span class="right-arrow">&#xFFEB;</span>
+            <a href="#">Lista produktów</a> <span class="right-arrow">&#xFFEB;</span>
+            <a href="#">{{ object.category }}</a> <span class="right-arrow">&#xFFEB;</span>
+            <a href="#">{{ object.name }}</a>
+        </p>
+        <div class="product-wrapper">
+            <div class="product-photos">
+                <div class="choose-photos">
+                    <div class="photo"><img src="{{ object.img }}"></div>
+
+                    {% if object.min_img_1 != None %}
+                    <div class="photo"><img src="{{object.min_img_1}}"></div>
+                    {% endif %}
+
+                    {% if object.min_img_2 != None %}
+                    <div class="photo"><img src="{{object.min_img_2}}"></div>
+                    {% endif %}
+
+                    {% if object.min_img_3 != None %}
+                    <div class="photo"><img src="{{object.min_img_3}}"></div>
+                    {% endif %}
+
+                </div>
+                <div class="current-photo">
+                    <div class="photo">
+                        <img src="{{ object.img }}">
+                    </div>
+                </div>
+            </div>
+            <div class="main-info">
+                <div class="desktop-center">
+                    <h2 class="product-name">{{ object.name }}</h2>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            {% if object.stars_full != 0 %}
+                            {% for i in "x"|ljust:object.stars_full %}
+                            <img src="{% static 'scraper/icons/star.svg' %}">
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if object.stars_empty != 0 %}
+                            {% for i in "x"|ljust:object.stars_empty %}
+                            <img src="{% static 'scraper/icons/star.svg' %}">
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <p class="main-rating">{{ object.average_rating }}</p>
+                        <p class="ammount-of-feedback">{{ object.opinions_number }} opinii</p>
+                    </div>
+                    <div class="product-purchase">
+                        <p class="price">{{ object.price }},00 zł</p>
+                        <a href="{% url 'product-download' %}?product_id={{ object.pk }}" target="_blank">
+                            <button class="buy-btn">Pobierz JSON</button>
+                        </a>
+                        <a class="charts" href="{% url 'product-charts' product.id %}">
+                            <img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                            wykresy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="opinions-table" class="display opinions-table" width="100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Autor</th>
+                    <th>Rekomendacja</th>
+                    <th>Gwiazdki</th>
+                    <th>Zalety</th>
+                    <th>Wady</th>
+                    <th>PZ</th>
+                    <th>Zakupiono</th>
+                    <th>Dodano</th>
+                    <th>Like</th>
+                    <th>Dislike</th>
+                    <th>Treść</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for opinion in object.opinions.all %}
+                <tr>
+                    <td>{{opinion.opinion_id}}</td>
+                    <td>{{opinion.author}}</td>
+                    <td>{{opinion.recomendation}}</td>
+                    <td>{{opinion.stars}}</td>
+                    <td>
+                        <div class="td">{{opinion.pros}}</div>
+                    </td>
+                    <td>
+                        <div class="td">{{opinion.cons}}</div>
+                    </td>
+                    <td>{{opinion.purchased}}</td>
+                    <td>{{opinion.purchase_date}}</td>
+                    <td>{{opinion.review_date}}</td>
+                    <td>{{opinion.usefull}}</td>
+                    <td>{{opinion.useless}}</td>
+                    <td>
+                        <div class="td">{{opinion.content}}</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </section>
+</main>
+<script>
+    // Tworzenie tabeli
+    $(document).ready(function () {
+        $('#opinions-table').DataTable({
+            "paging": true,
+            "ordering": true,
+            "info": false
+        });
+    });
+
+
+    // Zmiana zdjęć
+    const current_photo = document.querySelector('.current-photo').querySelector('img');
+    const choose_photos = document.querySelector('.choose-photos').querySelectorAll('img');
+
+    choose_photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            current_photo.src = photo.src;
+        });
+    });
+</script>
+
+{% endblock content %}

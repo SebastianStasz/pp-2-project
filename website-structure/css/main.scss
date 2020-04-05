@@ -405,6 +405,16 @@ section.description {
         display: flex;
         flex-direction: column;
         color: $light-gray;
+        user-select: none;
+
+        .checkbox-input-div {
+            margin-top: 20px;
+        }
+
+        .checkbox-input {
+            margin-left: 20px;
+        }
+
 
         .buttons {
             display: flex;
@@ -483,13 +493,25 @@ section.product {
             display: none;
             overflow: scroll;
             margin-right: 40px;
+            width: 60px;
+
+            .photo{
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
 
             img {
-                width: 60px;
-                height: 60px;
+                width: auto;
+                max-height: 60px;
+                max-width: 100%;
                 padding: 2px;
                 margin: 3px 0;
-                cursor: pointer;
                 transition: transform .1s ease-in-out;
 
                 &:first-child {
@@ -499,21 +521,21 @@ section.product {
                 &:last-child {
                     margin-bottom: 0;
                 }
-
-                &:hover {
-                    transform: scale(1.1);
-                }
             }
         }
     }
 
     .current-photo {
-        height: 100%;
         width: 228px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         img {
-            width: 100%;
-            height: 100%;
+            width: auto;
+            max-height: 270px;
+            max-width: 100%;
         }
     }
 
@@ -757,5 +779,46 @@ section.products-list {
 @media (min-width: 800px) {
     section.description {
         padding: 25px 80px;
+    }
+
+    section.product {
+        .main-info {
+            .desktop-center {
+                min-width: 400px;
+            }
+        }
+    }
+}
+
+// MESSAGE POP UP WINDOW
+section.message {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    background: rgba(7, 228, 14, .5);
+    padding: 15px 30px;
+    animation: pop-up 4s;
+    z-index: 100;
+}
+
+@keyframes pop-up {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
     }
 }

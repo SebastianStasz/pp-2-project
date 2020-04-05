@@ -5,56 +5,36 @@
 <!------ MAIN ------>
 <main>
     <section class="product products-list">
+        {% for product in products %}
         <article class="product-wrapper ">
             <div class="product-photos">
                 <div class="current-photo">
-                    <img src="{% static 'scraper/img/samsung-galaxy-s10e-1.jpg' %}">
+                    <img src="{{ product.img }}">
                 </div>
             </div>
             <div class="main-info">
                 <div class="desktop-center">
-                    <a href="single_product.html">
-                        <h2 class="product-name">Samsung Galaxy S10e 128GB SM-G970 Prism-Black</h2>
+                    <a href="{% url 'product-detail' product.id %}">
+                        <h2 class="product-name">{{ product.name }}</h2>
                     </a>
                     <div class="product-rating">
-                        <p class="advantages">Zalety: 25</p>
-                        <p class="main-rating">4,8 / 5</p>
-                        <p class="ammount-of-feedback">291 opinions</p>
+                        <p class="advantages">Zalety: {{ product.pros_number }}</p>
+                        <p class="main-rating">{{ product.average_rating }} / 5</p>
+                        <p class="ammount-of-feedback">{{ product.opinions_number }} opinii</p>
                     </div>
                     <div class="product-purchase">
-                        <p class="disadvantages">Wady: 25</p>
-                        <button class="buy-btn">Pobierz JSON</button>
-                        <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
+                        <p class="disadvantages">Wady: {{ product.cons_number }}</p>
+                        <a href="{% url 'product-download' %}?product_id={{ product.pk }}" target="_blank">
+                            <button class="buy-btn">Pobierz JSON</button>
+                        </a>
+                        <a class="charts" href="{% url 'product-charts' product.id %}"><img
+                                src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
                             wykresy</a>
                     </div>
                 </div>
             </div>
         </article>
-        <article class="product-wrapper ">
-            <div class="product-photos">
-                <div class="current-photo">
-                    <img src="{% static 'scraper/img/samsung-galaxy-s10e-2.jpg' %}">
-                </div>
-            </div>
-            <div class="main-info">
-                <div class="desktop-center">
-                    <a href="single_product.html">
-                        <h2 class="product-name">Samsung Galaxy S10e 128GB SM-G970 Prism-Black</h2>
-                    </a>
-                    <div class="product-rating">
-                        <p class="advantages">Zalety: 25</p>
-                        <p class="main-rating">4,8 / 5</p>
-                        <p class="ammount-of-feedback">291 opinions</p>
-                    </div>
-                    <div class="product-purchase">
-                        <p class="disadvantages">Wady: 25</p>
-                        <button class="buy-btn">Pobierz JSON</button>
-                        <a class="charts" href="#"><img src="{% static 'scraper/icons/graphic.svg' %}">Zobacz
-                            wykresy</a>
-                    </div>
-                </div>
-            </div>
-        </article>
+        {% endfor%}
     </section>
 </main>
 {% endblock content %}
