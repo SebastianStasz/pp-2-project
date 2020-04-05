@@ -38,13 +38,21 @@
         <div class="product-wrapper">
             <div class="product-photos">
                 <div class="choose-photos">
-                    <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    <div class="photo">
+                        <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    </div>
                     {% for img in product|get_value_from_dict:'product_min_img' %}
-                    <img src="http:{{ img }}">
+                    {% if img != None %}
+                    <div class="photo">
+                        <img src="http:{{ img }}">
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
                 <div class="current-photo">
-                    <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    <div class="photo">
+                        <img src="http:{{ product|get_value_from_dict:'product_img' }}">
+                    </div>
                 </div>
             </div>
             <div class="main-info">

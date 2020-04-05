@@ -2,7 +2,7 @@
 const cells = document.querySelectorAll('.td');
 
 cells.forEach(cell => {
-    if (cell.offsetHeight >= 120) cell.classList.add('td-hide')
+    if (cell.offsetHeight >= 99) cell.classList.add('td-hide')
 })
 
 // Komórki o wysokości 100 lub więcej

@@ -21,19 +21,22 @@ class Product(models.Model):
     ceneo_id = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
-    img = models.CharField(max_length=150)
-    min_img_1 = models.CharField(max_length=150)
-    min_img_2 = models.CharField(max_length=150)
-    min_img_3 = models.CharField(max_length=150)
     price = models.CharField(max_length=100)
+
+    # Zdjęcia
+    img = models.CharField(max_length=150)
+    min_img_1 = models.CharField(max_length=150, null=True)
+    min_img_2 = models.CharField(max_length=150, null=True)
+    min_img_3 = models.CharField(max_length=150, null=True)
 
     # Opinie
     average_rating = models.FloatField()
     opinions_number = models.PositiveIntegerField()
     pros_number = models.PositiveIntegerField()
     cons_number = models.PositiveIntegerField()
+    opinions = models.ManyToManyField(Opinion, blank=True)
 
-    # Liczba gwiazdek
+    # Gwiazdki
     stars_full = models.PositiveIntegerField()
     stars_empty = models.PositiveIntegerField()
     star_1 = models.PositiveIntegerField()
@@ -46,8 +49,3 @@ class Product(models.Model):
     recomended = models.PositiveIntegerField()
     notrecomended = models.PositiveIntegerField()
     neutral = models.PositiveIntegerField()
-
-    opinions = models.ManyToManyField(Opinion, blank=True)
-
-    def __str__(self):
-        return self.name
